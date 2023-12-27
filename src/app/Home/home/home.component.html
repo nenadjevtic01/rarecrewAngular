@@ -1,0 +1,33 @@
+<div class="container">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Employee Name</th>
+      <th scope="col">Total Time Worked (hours)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let employee of groupedEmployees">
+      <tr style="background-color: lightcoral" *ngIf="employee.TotalTimeWorked<100;else notRedRow">
+        <td *ngIf="employee.EmployeeName==null;else elseBlock">Employee name not provided</td>
+        <ng-template #elseBlock>
+          <td>{{ employee.EmployeeName }}</td>
+        </ng-template>
+        <td>{{ employee.TotalTimeWorked }}</td>
+      </tr>
+      <ng-template #notRedRow>
+        <tr>
+          <td *ngIf="employee.EmployeeName==null;else elseBlock">Employee name not provided</td>
+          <ng-template #elseBlock>
+            <td>{{ employee.EmployeeName }}</td>
+          </ng-template>
+          <td>{{ employee.TotalTimeWorked }}</td>
+        </tr>
+      </ng-template>
+    </ng-container>
+    </tbody>
+  </table>
+
+  <app-piechart [pieChartData]="groupedEmployees"></app-piechart>
+</div>
+
